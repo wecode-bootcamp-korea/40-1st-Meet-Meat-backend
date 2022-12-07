@@ -1,0 +1,16 @@
+-- migrate:up
+CREATE TABLE customers(
+    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(200) NOT NULL,
+    address1 VARCHAR(200) NOT NULL,
+    address2 VARCHAR(200) NULL,
+    point DECIMAL(10,1) NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    );
+
+
+-- migrate:down
+DROP TABLE customers;
