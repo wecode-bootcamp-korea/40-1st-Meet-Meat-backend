@@ -1,36 +1,17 @@
-const { DataSource } = require('typeorm');
-
-const AppData = new DataSource({
-    type: process.env.TYPEORM_TYPE,
-    host: process.env.TYPEORM_HOST,
-    port: process.env.TYPEORM_PORT,
-    username: process.env.TYPEORM_USERNAME,
-    password: process.env.TYPEORM_PASSWORD,
-    database: process.env.TYPEORM_DATABASE
-})
-
-AppData.initialize()
-    .then(() => 
-        console.log('Data Source has been initialized')
-    )
-    .catch((err) => {
-        console.error('Failed to initialize Data Source', err)
-        AppData.destroy();
-    })
+const AppData = require('./dataSource');
     
-const createUser = async (req, res) => {
-    try {
-        const { name, email, hashedpassword, address } = req.body
+const createUser = async (name, email, hashedPassword, address) => {
 
+    try {
         await AppData.query(
-            `INSERT INTO users (
+            `INSERT INTO customers (
                 name,
                 email,
                 password,
-                address
+                address_default
             ) VALUES (?, ?, ?, ?)
             `,
-            [ name, email, hashedpassword, address ]
+            [ name, email, hashedPassword, address ]
         );
     } catch (err) {
         const error = new Error('INVALID DATA INPUT')
