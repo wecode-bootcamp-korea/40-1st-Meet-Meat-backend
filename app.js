@@ -9,6 +9,7 @@ const morgan =  require("morgan");
 //Custom package
 require("dotenv").config()
 const route = require('./api/routes')
+const { globalErrorHandler } = require('./api/utils/error')
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
 app.use(route);
+app.use(globalErrorHandler);
 
 const PORT = process.env.PORT;
 const server = http.createServer(app);

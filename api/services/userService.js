@@ -7,7 +7,7 @@ const signIn = async ( email, password ) => {
     
     const user = await userDao.getUserByEmail(
         email, password)
-    
+
     const match = await bcrypt.compare(password, user.password)
 
     if(!match){
