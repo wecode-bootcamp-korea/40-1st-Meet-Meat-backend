@@ -10,13 +10,14 @@ const { DataSource } = require('typeorm');
 
 //Custom package
 require("dotenv").config()
+const route = require('./api/routes')
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use(morgan('combined'));
-
+app.use(route);
 
 const appData = new DataSource ({
     type: process.env.TYPEORM_CONNECTION,
