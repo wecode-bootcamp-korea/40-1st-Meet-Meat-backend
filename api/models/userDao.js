@@ -3,8 +3,10 @@ const AppData = require('./dataSource');
 const getUserByEmail = async (email, password) => {
     const user =
         await AppData.query(
-        `SELECT * FROM 
-            customers c 
+        `SELECT 
+            c.email,
+            c.password 
+        FROM customers c 
             WHERE c.email = ?
             `, [email]
         )
