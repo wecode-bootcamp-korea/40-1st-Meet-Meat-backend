@@ -10,12 +10,12 @@ const AppData = new DataSource({
 })
 
 AppData.initialize()
-    .then(() => 
-        console.log('Data Source has been initialized')
-    )
+    .then(() => {
+        console.log("Data Source has been initialized")
+    })
     .catch((err) => {
         console.error('Failed to initialize Data Source', err)
         AppData.destroy();
     })
 
-module.exports = AppData
+module.exports = AppData 

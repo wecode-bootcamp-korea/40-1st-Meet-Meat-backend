@@ -1,3 +1,3 @@
 const userDao = require('./userDao')
 
-module.exports = { userDao }
+module.exports = { userDao };

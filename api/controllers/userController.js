@@ -1,4 +1,5 @@
-const { userService } = require('../services');
+const { userService } = require('../services')
+const { catchAsync } = require('../utils/error')
 
 const signUp = async ( req, res ) => {
     try {
@@ -18,4 +19,13 @@ const signUp = async ( req, res ) => {
     }
 };
 
-module.exports = { signUp };
+const signIn = catchAsync(async(req, res) => {
+    const { email, password } = req.body
+
+    const accessToken = await userService.signIn(
+        email, password
+    )
+    res.status(201).json({ access_token : accessToken })
+})
+
+module.exports = { signUp, signIn }

@@ -8,9 +8,8 @@ const morgan =  require("morgan");
 
 //Custom package
 require("dotenv").config()
-
-const route = require('./api/routes');
-const { globalErrorHandler } = require("./api/utils/error");
+const route = require('./api/routes')
+const { globalErrorHandler } = require('./api/utils/error')
 
 const app = express();
 
