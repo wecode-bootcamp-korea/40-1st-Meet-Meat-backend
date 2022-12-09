@@ -18,7 +18,8 @@ const signUp = async (name, email, password, address) => {
         throw err;
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const SALT_ROUNDS = 10;
+    const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     const createUser =
         await userDao.createUser(
             name, email, hashedPassword, address
