@@ -1,13 +1,14 @@
 const { productService } = require('../services')
+const { catchAsync } = require('../utils/error')
 
-const getProductsList = async(req, res) => {
-    const productListData = await productService.getProductsList()
+const getAllProducts = catchAsync(async(req, res) => {
+    const productListData = await productService.getAllProducts()
     res.status(200).json(productListData)
-}
+})
 
-const getProductsListByName = async(req, res) => {
+const getProductsListByName = catchAsync(async(req, res) => {
     const productListByName = await productService.getProductsListByName(req.params.name)
     res.status(200).json(productListByName)
-}
+})
 
-module.exports = { getProductsList, getProductsListByName }
+module.exports = { getAllProducts, getProductsListByName }
