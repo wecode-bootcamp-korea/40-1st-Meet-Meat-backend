@@ -30,11 +30,11 @@ const signUp = async (name, email, password, address) => {
 }
 
 const signIn = async ( email, password ) => {
-    
+
     const user = await userDao.getUserByEmail(
         email, password)
-
-    const match = await bcrypt.compare(password, user.password)
+        
+        const match = await bcrypt.compare(password, user.password)
 
     if(!match){
         const err = new Error('INVALID_INPUT_DATA')
@@ -51,4 +51,14 @@ const signIn = async ( email, password ) => {
         return accessToken;
 }
 
-module.exports = { signUp, signIn }
+
+const getUserById = async (userId) => {
+    return await userDao.getUserById(userId)
+
+}
+
+module.exports = { 
+    signUp, 
+    signIn,
+    getUserById
+}
