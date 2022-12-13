@@ -1,18 +1,19 @@
 const AppData = require('./dataSource')
 
-const addCart = async(userId) => {
+const addCart = async(userId, productName) => {
     const data = [];
     
     const porkData = await AppData.query(
-        `SELECT 
-            orders.customers_id,
-            orders.order_status_code_id,
-            orders.detail,
-            order_items.
-          JOIN order_items ON `
+        `INSERT INTO order_itmes(
+            orders_id,
+            products_id,
+            total_price_with_point,
+            total_quantity)
+            VALUES (?, ?, ?, ?)
+            `, []
         )
     const beefData = await AppData.query(
-        ``
+        `np`
         )
 
     const chickentData = await AppData.query(
