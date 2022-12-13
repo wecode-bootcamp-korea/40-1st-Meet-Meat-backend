@@ -3,9 +3,9 @@ const { catchAsync } = require('../utils/error')
 
 const addCart = catchAsync(async(req, res) => {
     const { userId }= req.user
-    const productName = req.params.name
+    const { productId, quantity } = req.body
 
-    const addCartByUserId = await productService.addCart(userId, productName)
+    const addCartByUserId = await productService.addCart(userId, productId, quantity)
     res.status(200).json({ message : addCartByUserId })
 })
 
