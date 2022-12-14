@@ -5,6 +5,6 @@ const { loginRequired } = require('../utils/auth')
 
 const router = express.Router();
 
-router.get('/:customerId', loginRequired, paymentController.getPayment)
+router.get('/:Id', loginRequired, paymentController.getPayment)
 
 module.exports = router 
