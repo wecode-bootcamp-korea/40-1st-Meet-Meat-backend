@@ -13,9 +13,9 @@ const getProductsListByName = catchAsync(async(req, res) => {
 
 const addCart = catchAsync(async(req, res) => {
     const { userId }= req.user
-    const { productId, quantity, productOption } = req.body
+    const { productId, quantity, productSizeId, productTypeId} = req.body
 
-    const addCartByUserId = await productService.addCart(userId, productId, quantity, productOption)
+    const addCartByUserId = await productService.addCart(userId, productId, quantity, productSizeId, productTypeId)
     res.status(200).json({ message : addCartByUserId })
 })
 

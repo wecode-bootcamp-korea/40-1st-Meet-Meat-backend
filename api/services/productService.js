@@ -10,8 +10,8 @@ const getProductsListByName = async(name) => {
     return productListByName
 }
 
-const addCart = async(userId, productId, quantity) => {
-    const addCartByUserId = await productDao.addCart(userId, productId, quantity)
+const addCart = async(userId, productId, quantity, productSizeId, productTypeId) => {
+    const addCartByUserId = await productDao.addCart(userId, productId, quantity, productSizeId, productTypeId)
     return addCartByUserId
 }
 
