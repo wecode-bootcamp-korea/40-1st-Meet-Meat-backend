@@ -1,5 +1,4 @@
 const AppData = require('./dataSource')
-const { cagtegoriesEnum } = require('./enum')
 
 const getAllProducts = async () => {
     const AllproductListData = await AppData.query(
