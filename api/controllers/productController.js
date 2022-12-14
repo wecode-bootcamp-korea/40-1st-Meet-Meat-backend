@@ -10,15 +10,19 @@ const getProductsListByName = catchAsync(async(req, res) => {
     const productListByName = await productService.getProductsListByName(req.params.name)
     res.status(200).json(productListByName)
 })
-const { productService } = require('../services')
-const { catchAsync } = require('../utils/error')
 
 const addCart = catchAsync(async(req, res) => {
     const { userId }= req.user
-    const { productId, quantity } = req.body
+    const { productId, quantity, productOption } = req.body
 
-    const addCartByUserId = await productService.addCart(userId, productId, quantity)
+    const addCartByUserId = await productService.addCart(userId, productId, quantity, productOption)
     res.status(200).json({ message : addCartByUserId })
 })
 
-module.exports = { getAllProducts, getProductsListByName, addCart }
+const updateCart = catchAsync(async(req, res) => {
+    const { updatedQuantity, productId, userId } = req.body
+    const updateCart = await productService.updateCart(updatedQuantity, productId, userId)
+    res.status(204).json({ message : 'DATA_UPDATE_COMPLETED' })
+})
+
+module.exports = { getAllProducts, getProductsListByName, addCart, updateCart }

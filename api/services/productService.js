@@ -15,4 +15,9 @@ const addCart = async(userId, productId, quantity) => {
     return addCartByUserId
 }
 
-module.exports = { getAllProducts, getProductsListByName, addCart }
+const updateCart = async(updatedQuantity, productId, userId, productOption) => {
+    const updateCart = await productDao.updateCart(updatedQuantity, productId, userId, productOption)
+    return updateCart
+}
+
+module.exports = { getAllProducts, getProductsListByName, addCart, updateCart }
