@@ -1,4 +1,5 @@
 const AppData = require('./dataSource')
+const { cagtegoriesEnum } = require('./enum')
 
 const getAllProducts = async () => {
     const AllproductListData = await AppData.query(
@@ -9,14 +10,16 @@ const getAllProducts = async () => {
              description,
              date,
              tag_id,
-             category_id,
-             products_options_id
+             categories_id,
+             products_size_id,
+             products_type_id
         FROM products`)
     return AllproductListData
 }
 
-const getProductsListByName = async(name) => {
-    const productListDataByName = await AppData.query(
+const getProductsDataBycategoryId = async(categories_id) => {
+
+    const productDataBycategoryId = await AppData.query(
         `SELECT
             p.name,
             p.price,
@@ -24,11 +27,12 @@ const getProductsListByName = async(name) => {
             p.description,
             p.date,
             p.tag_id,
-            p.category_id,
+            p.categories_id,
             p.products_options_id 
           FROM products AS p
-            WHERE p.name = '%${name}%'`)
-    return productListDataByName
+            WHERE p.categories_id =?`, [categories_id]
+            )
+    return productDataBycategoryId
 }
 
-module.exports = { getAllProducts, getProductsListByName }
+module.exports = { getAllProducts, getProductsDataBycategoryId }
