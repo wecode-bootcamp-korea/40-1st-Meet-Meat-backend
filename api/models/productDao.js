@@ -1,10 +1,6 @@
 const AppData = require('./dataSource')
 const { getConnection } = require('typeorm')
-
-const orderStatusEnum = {
-    "CART": 1,
-    "IN_TRANSIT" : 2
-    }
+const { productsCategoryEnum, productsSizeEnum, productsTypeEnum, orderStatusEnum } = require('../models/enum')
 
 const getAllProducts = async () => {
     const AllproductListData = await AppData.query(
@@ -39,7 +35,7 @@ const getProductsListByName = async(name) => {
  
 const queryRunner = AppData.createQueryRunner()
 
-const addCart = async(userId, productId, quantity, productOption) => {
+const addCart = async(userId, productId, quantity, productSizeId, productTypeId) => {
         
     await queryRunner.connect();
     
@@ -56,8 +52,10 @@ const addCart = async(userId, productId, quantity, productOption) => {
         const orderProductsData = await queryRunner.query(
             `SELECT 
                 p.price
-                p.
-             FROM products AS p WHERE p.id=?`, [productId]
+             FROM products AS p 
+             WHERE p.id=? 
+                AND p.products_size_id =? 
+                AND p.products_type_id=?`, [productId, productSizeId, productTypeId]
         )
     
         await queryRunner.query(
@@ -66,9 +64,8 @@ const addCart = async(userId, productId, quantity, productOption) => {
                 products_id,
                 total_price_with_point,
                 total_quantity,
-                order_item_status_code
-                ) VALUES (?, ?, ?, ?, ?)
-                `, [ordersData.id, productId, (orderProductsData.price*quantity), quantity, productOption]
+                ) VALUES (?, ?, ?, ?)
+                `, [ordersData.customers_id, productId, (orderProductsData.price*quantity), quantity]
             )
     
         await queryRunner.query(
@@ -76,8 +73,7 @@ const addCart = async(userId, productId, quantity, productOption) => {
                 o.orders_id,
                 o.products_id,
                 o.total_price_with_point,
-                o.total_quantiy,
-                o.order_item_status_code
+                o.total_quantiy
               FROM order_items AS o
               LEFT JOIN orders WHERE orders.customers_id=?
               `, [userId]
@@ -95,18 +91,29 @@ const addCart = async(userId, productId, quantity, productOption) => {
 
 const updateCart = async(updatedQuantity, productId, userId) => {
 
-    const ordersData = await AppData.query(
+    await queryRunner.connect();
+    
+    await queryRunner.startTransaction()
+    try{
+    const ordersData = await queryRunner.query(
         `SELECT o.id
             FROM orders AS o
             WHERE o.customers_id=?`, [userId]
     )
     
-    const updateOrderItems = await AppData.query(
+    const updateOrderItems = await queryRunner.query(
         `UPDATE order_items
             SET total_quantity = ${updatedQuantity},
             WHERE products_id = ? AND orders_id = ?`, [productId, ordersData.id]
     )
-    return updateOrderItems
+    }
+    catch{
+        console.error(err)
+        await queryRunner.rollbackTransaction()
+    }
+    finally{
+        await queryRunner.release()
+    }
 }
 
 module.exports = { getAllProducts, getProductsListByName, addCart, updateCart }
