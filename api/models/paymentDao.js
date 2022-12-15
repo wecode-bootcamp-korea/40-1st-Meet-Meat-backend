@@ -1,4 +1,3 @@
-const { SimpleConsoleLogger } = require('typeorm');
 const AppData = require('./dataSource');
 
 const getTotalPayment = async (userId) =>{

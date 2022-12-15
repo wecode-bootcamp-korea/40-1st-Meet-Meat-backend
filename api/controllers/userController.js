@@ -28,4 +28,6 @@ const signIn = catchAsync(async(req, res) => {
     res.status(201).json({ access_token : accessToken })
 })
 
-module.exports = { signUp, signIn }
+
+
+module.exports = { signUp, signIn}

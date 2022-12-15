@@ -31,8 +31,8 @@ const getUserByEmail = async (email, password) => {
 
 const getUserById = async (userId) => {
 
-	const result = await AppData.query(`
-		SELECT 
+	const result = await AppData.query(
+        `SELECT 
 			id,
 			name,
 			email,
@@ -43,6 +43,7 @@ const getUserById = async (userId) => {
 
 	return result[0]
 }
+
 
 module.exports = { 
     createUser,
