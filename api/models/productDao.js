@@ -57,7 +57,7 @@ const addCart = async(userId, productId, quantity, productSizeId, productTypeId)
                 AND p.products_size_id =? 
                 AND p.products_type_id=?`, [productId, productSizeId, productTypeId]
         )
-    
+        
         await queryRunner.query(
             `INSERT INTO order_items(
                 orders_id,
@@ -80,7 +80,7 @@ const addCart = async(userId, productId, quantity, productSizeId, productTypeId)
         )
         await queryRunner.commitTransaction()
     }
-    catch{
+    catch (err) {
         console.error(err)
         await queryRunner.rollbackTransaction()
     }

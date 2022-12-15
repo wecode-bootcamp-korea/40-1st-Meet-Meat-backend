@@ -18,11 +18,12 @@ const createUser = async(name, email, hashedPassword, address) => {
 const getUserByEmail = async (email, password) => {
     const user =
         await AppData.query(
-        `SELECT 
-            c.email,
-            c.password 
-        FROM customers c 
-            WHERE c.email = ?
+        `SELECT
+            id,
+            email,
+            password 
+        FROM customers 
+            WHERE email = ?
             `, [email]
         )
         return user[0]

@@ -12,7 +12,7 @@ const getProductsListByName = catchAsync(async(req, res) => {
 })
 
 const addCart = catchAsync(async(req, res) => {
-    const { userId }= req.user
+    const userId= req.user
     const { productId, quantity, productSizeId, productTypeId} = req.body
 
     const addCartByUserId = await productService.addCart(userId, productId, quantity, productSizeId, productTypeId)
