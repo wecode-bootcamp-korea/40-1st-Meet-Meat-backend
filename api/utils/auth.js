@@ -19,6 +19,7 @@ const loginRequired = async (req, res, next) => {
 
   // 3) Check if user still exists
 	const user = await userService.getUserById(decoded.userId)
+
 	
 	if (!user) {
 		const error = new Error('USER_DOES_NOT_EXIST')

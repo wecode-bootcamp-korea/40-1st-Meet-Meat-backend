@@ -7,6 +7,4 @@ module.exports = {
     userController,
     paymentController,
     productController
-    
 }
-

@@ -19,10 +19,11 @@ const getUserByEmail = async (email, password) => {
     const user =
         await AppData.query(
         `SELECT
-            c.email,
-            c.password 
-        FROM customers AS c 
-            WHERE c.email = ?
+            id,
+            email,
+            password 
+        FROM customers 
+            WHERE email = ?
             `, [email]
         )
         return user[0]

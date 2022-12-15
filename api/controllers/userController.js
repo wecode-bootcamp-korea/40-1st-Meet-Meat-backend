@@ -1,3 +1,4 @@
+const { userDao } = require('../models');
 const { userService } = require('../services')
 const { catchAsync } = require('../utils/error')
 
@@ -27,7 +28,6 @@ const signIn = catchAsync(async(req, res) => {
     )
     res.status(201).json({ access_token : accessToken })
 })
-
 
 
 module.exports = { signUp, signIn}

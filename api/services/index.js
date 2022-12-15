@@ -6,5 +6,5 @@ const productService = require('./productService')
 module.exports = { 
     userService,
     paymentService,
-    productService 
+    productService
  }

@@ -2,10 +2,16 @@ const { paymentDao } = require('../models')
 
 
 const getPaymentsByUser = async (user) => {
-	const userId = user.id 
-	console.log(userId)
-	const userPointLeft = await paymentDao.getTotalPayment(userId)
+	const userPointLeft = await paymentDao.getTotalPayment(user)
 	return {userPointLeft}
 }
 
-module.exports = { getPaymentsByUser }
+const getPrePaymentInfo = async (user)=>{
+	const getPaymentInFo = await paymentDao.getPaymentInFo(user)
+	return (getPaymentInFo)
+}
+
+module.exports = { 
+	getPaymentsByUser,
+	getPrePaymentInfo
+}
