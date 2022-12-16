@@ -10,14 +10,10 @@ const getProductsListByName = async(name) => {
     return productListByName
 }
 
-const addCart = async(userId, productId, quantity, productSizeId, productTypeId) => {
-    const addCartByUserId = await productDao.addCart(userId, productId, quantity, productSizeId, productTypeId)
-    return addCartByUserId
+const getProductById = async(productId) => {
+    console.log(productId)
+    const productDetail = await productDao.getDetail(productId)
+    return productDetail
 }
 
-const updateCart = async(updatedQuantity, productId, userId, productOption) => {
-    const updateCart = await productDao.updateCart(updatedQuantity, productId, userId, productOption)
-    return updateCart
-}
-
-module.exports = { getAllProducts, getProductsListByName, addCart, updateCart }
+module.exports = { getAllProducts, getProductsListByName, getProductById }

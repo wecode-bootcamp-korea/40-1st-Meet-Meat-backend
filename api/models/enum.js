@@ -8,7 +8,7 @@ const productsCategoryEnum = Object.freeze({
 const productsSizeEnum = Object.freeze({
     "THIN": 1,
     "DEFAULT": 2,
-    "THINK": 3
+    "THICK": 3
 })
 
 const productsTypeEnum = Object.freeze({
@@ -21,4 +21,8 @@ const orderStatusEnum = Object.freeze({
     "IN_TRANSIT" : 2
     })
 
-module.exports = { productsCategoryEnum, productsSizeEnum, productsTypeEnum, orderStatusEnum }
+const detailEnum = Object.freeze({
+    "DETAIL": 1
+})
+
+module.exports = { productsCategoryEnum, productsSizeEnum, productsTypeEnum, orderStatusEnum, detailEnum }
