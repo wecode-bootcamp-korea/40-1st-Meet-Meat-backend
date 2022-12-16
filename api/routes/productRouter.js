@@ -5,9 +5,9 @@ const { loginAuthorization } = require('../utils/auth');
 
 const router = express.Router();
 
-router.get('/'/*, loginAuthorization*/, productController.getAllProducts) // products
+router.get('/', loginAuthorization, productController.getAllProducts)
 
-router.get('/name/:name'/*, loginAuthorization*/, productController.getProductsListByName) // products/pork
-router.get('/:productId'/*, loginAuthorization*/, productController.getProductById) // detail -> 구현해야 됨
+router.get('/name/:name', loginAuthorization, productController.getProductsListByName) 
+router.get('/:productId', loginAuthorization, productController.getProductById) 
 
 module.exports = router
