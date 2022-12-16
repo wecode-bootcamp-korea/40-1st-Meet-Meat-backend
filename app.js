@@ -14,6 +14,7 @@ const { globalErrorHandler } = require('./api/utils/error')
 const app = express();
 
 app.use(express.json());
+app.set('etag', false)
 app.use(cors());
 app.use(morgan('combined'));
 app.use(route);
