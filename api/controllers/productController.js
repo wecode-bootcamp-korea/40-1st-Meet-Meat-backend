@@ -14,8 +14,7 @@ const getProductsListByName = catchAsync(async(req, res) => {
 const getProductById = catchAsync(async(req, res) => {
     const productId = req.params.productId
     const productDetail = await productService.getProductById(productId)
-    console.log(productDetail[0])
-    res.status(200).json(productDetail[0])
+    res.status(200).json(productDetail)
 })
 
 module.exports = { 
