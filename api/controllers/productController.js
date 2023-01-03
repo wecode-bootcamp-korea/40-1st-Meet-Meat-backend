@@ -6,9 +6,9 @@ const getAllProducts = catchAsync(async(req, res) => {
     res.status(200).json(productListData)
 })
 
-const getProductsListByName = catchAsync(async(req, res) => {
-    const productListByName = await productService.getProductsListByName(req.params.name)
-    res.status(200).json(productListByName)
+const getProductsDataBycategoryId = catchAsync(async(req, res) => {
+    const productDataBycategoryId = await productService.getProductsDataBycategoryId(req.query.categories_id)
+    res.status(200).json(productDataBycategoryId)
 })
 
-module.exports = { getAllProducts, getProductsListByName }
+module.exports = { getAllProducts, getProductsDataBycategoryId }

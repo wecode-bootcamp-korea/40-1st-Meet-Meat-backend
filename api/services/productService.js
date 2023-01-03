@@ -5,9 +5,9 @@ const getAllProducts = async () => {
     return productListData
 }
 
-const getProductsListByName = async(name) => {
-    const productListByName = await productDao.getProductsListByName(name)
-    return productListByName
+const getProductsDataBycategoryId = async(categories_id) => {
+    const productDataBycategoryId = await productDao.getProductsDataBycategoryId(categories_id)
+    return productDataBycategoryId
 }
 
-module.exports = { getAllProducts, getProductsListByName }
+module.exports = { getAllProducts, getProductsDataBycategoryId }
